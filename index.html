@@ -1,10 +1,26 @@
-<script>
-  // Initialize the agent at application startup.
-  const fpPromise = import('https://fpjscdn.net/v4/ALlHhnA59v7lsp29IpXq')
-    .then(Fingerprint => Fingerprint.start())
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fingerprint Pro Test</title>
+</head>
+<body>
+  <h1>Fingerprint Pro Test</h1>
 
-  // Get the visitor and event identifier when you need it.
-  fpPromise
-    .then(fp => fp.get())
-    .then(result => console.log(result.event_id, result.visitor_id))
-</script>
+  <p id="output">Loading...</p>
+
+  <script>
+    const fpPromise = import('https://fpjscdn.net/v3/ALlHhnA59v7lsp29IpXq')
+      .then(FingerprintJS => FingerprintJS.load());
+
+    fpPromise
+      .then(fp => fp.get())
+      .then(result => {
+        document.getElementById("output").innerText =
+          "Visitor ID: " + result.visitorId;
+
+        console.log(result);
+      });
+  </script>
+
+</body>
+</html>
